@@ -5,7 +5,7 @@ WORKDIR /app
 
 ADD pom.xml .
 
-RUN ["app/mvn-entrypoint.sh", "mvn", "verify", "clean", "--fail-never"]
+RUN ["/app", "mvn", "verify", "clean", "--fail-never"]
 
 ADD . /app
 

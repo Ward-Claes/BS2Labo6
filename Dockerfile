@@ -9,7 +9,7 @@ RUN mvn clean install
 RUN echo $(ls -a)
 
 FROM tomcat:8.5.43-jdk8
-copy --from=1 /app/target /app
+copy --from=0 /app/target /app
 RUN echo $(ls -a)
 COPY /target/project-ucll-1.0-SNAPSHOT.war /usr/local/tomcat/webapps
 EXPOSE 8080

@@ -7,7 +7,7 @@ ADD pom.xml .
 
 RUN ["/usr/local/bin/mvn-entrypoint.sh", "mvn", "verify", "clean", "--fail-never"]
 
-ADD . $HOME
+ADD . /app
 
 RUN ["mvn","clean","install","-T","2C","-DskipTests=true"]
 

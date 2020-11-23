@@ -14,3 +14,4 @@ RUN ["mvn","clean","install","-T","2C","-DskipTests=true"]
 FROM tomcat:8.5.43-jdk8
 
 COPY --from=maven_builder /app /usr/local/tomcat/webapps
+expose 80

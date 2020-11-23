@@ -1,20 +1,16 @@
 
-FROM centos
+FROM maven:3.6.1-jdk-8 as maven_builder
 
-MAINTAINER aksarav@middlewareinventory.com
+WORKDIR /app
 
-RUN mkdir /opt/tomcat/
+ADD pom.xml .
 
-WORKDIR /opt/tomcat
-RUN curl -O https://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.40/bin/apache-tomcat-8.5.40.tar.gz
-RUN tar xvfz apache*.tar.gz
-RUN mv apache-tomcat-8.5.40/* /opt/tomcat/.
-RUN yum -y install java
-RUN java -version
+RUN ["/usr/local/bin/mvn-entrypoint.sh", "mvn", "verify", "clean", "--fail-never"]
 
-WORKDIR /opt/tomcat/webapps
-RUN curl -O -L https://github.com/Ward-Claes/BS2Labo6/raw/master/dist/SampleWebApp.war
+ADD . $HOME
 
-EXPOSE 8080
+RUN ["mvn","clean","install","-T","2C","-DskipTests=true"]
 
-CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+FROM tomcat:8.5.43-jdk8
+
+COPY --from=maven_builder /app/wc_admin/target/wc-admin.war /usr/local/tomcat/webapps

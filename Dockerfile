@@ -10,5 +10,5 @@ RUN mvn clean install
 
 FROM tomcat:8.5.43-jdk8
 
-COPY /app/project-ucll.war /usr/local/tomcat/webapps
+COPY /app/web-1.0-SNAPSHOT.war /usr/local/tomcat/webapps
 EXPOSE 8080

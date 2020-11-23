@@ -33,6 +33,7 @@ jobs:
           file: ./Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: wardclaes/bs2labo6
           tags: latest
           
           

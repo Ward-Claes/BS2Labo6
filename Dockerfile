@@ -5,7 +5,7 @@ WORKDIR /app
 
 ADD pom.xml .
 
-RUN ["https://github.com/Ward-Claes/BS2Labo6", "mvn", "verify", "clean", "--fail-never"]
+RUN ["app/mvn-entrypoint.sh", "mvn", "verify", "clean", "--fail-never"]
 
 ADD . /app
 
